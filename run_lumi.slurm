@@ -3,7 +3,7 @@
 #SBATCH -A project_465002387
 #SBATCH -p dev-g
 #SBATCH -N 1
-#SBATCH --gpus-per-node=8
+#SBATCH --gpus=8
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
 #SBATCH -t 00:30:00
@@ -17,6 +17,7 @@ module load pytorch
 export HF_HOME=${SCRATCH:-$PWD}/.cache/huggingface
 export TRANSFORMERS_CACHE=$HF_HOME
 export HF_DATASETS_CACHE=$HF_HOME
+export TOKENIZERS_PARALLELISM=false
 
 export NCCL_DEBUG=WARN
 #export NCCL_ASYNC_ERROR_HANDLING=1
