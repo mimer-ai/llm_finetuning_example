@@ -15,7 +15,6 @@ module load pytorch
 #source .venv/bin/activate
 
 export HF_HOME=${SCRATCH:-$PWD}/.cache/huggingface
-export TRANSFORMERS_CACHE=$HF_HOME
 export HF_DATASETS_CACHE=$HF_HOME
 export TOKENIZERS_PARALLELISM=false
 
