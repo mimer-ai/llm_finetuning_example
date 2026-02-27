@@ -37,6 +37,8 @@ The training can then be run with:
 sbatch run_leonardo.slurm # same thing for run_lumi.slurm and run_meluxina.slurm
 ```
 
+On Meluxina, a venv has to be created after importing the `PyTorch` module. This can only be done on a compute node (the module system is only installed on compute nodes). In the venv, `transformers==4.52.e` has to be installed for compatibility with Leonardo and LUMI, together with `accelerate,huggingface, peft, datasets, tokenizers`. After that the script can be run as above.
+
 ## Licensing
 - Dataset: databricks-dolly-15k (CC BY-SA 3.0) — commercial use allowed with attribution and share-alike. See dataset card. 
 - Code: Apache‑style MIT/Apache compatible packages.
