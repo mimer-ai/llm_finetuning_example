@@ -17,6 +17,7 @@ from transformers import (
 )
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, TaskType
+import contextlib
 
 
 def set_seed(seed: int):
@@ -113,8 +114,8 @@ def main():
         transformers.utils.logging.set_verbosity_error()
         transformers.logging.disable_progress_bar()
         devnull = getattr(os, "devnull", "/dev/null")
-        sys.stdout = open(devnull, "w")
-        sys.stderr = open(devnull, "w")
+        stdout_ctx = contextlib.redirect_stdout(devnull)
+        stderr_ctx = contextlib.redirect_stderr(devnull)
 
     torch.backends.cuda.matmul.allow_tf32 = True
 
