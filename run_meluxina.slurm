@@ -21,6 +21,7 @@ export HF_HUB_CACHE=$HF_HOME
 export NCCL_DEBUG=WARN
 export NCCL_ASYNC_ERROR_HANDLING=1
 export CUDA_LAUNCH_BLOCKING=0
+export TOKENIZERS_PARALLELISM=false
 
 
 python tools/prep_dolly.py --max_train_samples 8000 --max_val_samples 800
