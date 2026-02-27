@@ -16,7 +16,6 @@ module purge
 ml profile/deeplrn cineca-ai/4.3.0
 
 export HF_HOME=${SCRATCH:-$PWD}/.cache/huggingface
-export TRANSFORMERS_CACHE=$HF_HOME
 export HF_DATASETS_CACHE=$HF_HOME
 export HF_HUB_CACHE=$HF_HOME
 export HF_HUB_OFFLINE=1
