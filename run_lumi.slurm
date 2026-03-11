@@ -10,8 +10,8 @@
 #SBATCH -o logs/%x_%j.out
 
 module purge
-module use /appl/local/csc/modulefiles/
-module load pytorch
+module use /appl/local/laifs/modules
+module load lumi-aif-singularity-bindings
 #source .venv/bin/activate
 
 export HF_HOME=${SCRATCH:-$PWD}/.cache/huggingface
@@ -19,12 +19,8 @@ export HF_DATASETS_CACHE=$HF_HOME
 export TOKENIZERS_PARALLELISM=false
 
 export NCCL_DEBUG=WARN
-#export NCCL_ASYNC_ERROR_HANDLING=1
-#export HIP_VISIBLE_DEVICES=$(seq -s, 0 $((SLURM_GPUS_ON_NODE-1)))
+export SIF=/appl/local/laifs/containers/lumi-multitorch-latest.sif
 
-#export MASTER_ADDR=$(hostname)
-#export MASTER_PORT=$((12000 + RANDOM % 20000))
+singularity run $SIF python tools/prep_dolly.py --max_train_samples 10000 --max_val_samples 1000
 
-python tools/prep_dolly.py --max_train_samples 10000 --max_val_samples 1000
-
-accelerate launch   --multi_gpu   --num_processes ${SLURM_GPUS}   --num_machines 1   src/train.py   --bf16   --output_dir outputs/qwen15b_lora_dolly_lumi   --per_device_batch_size 2   --epochs 1   --num_workers 8
+singularity run $SIF accelerate launch   --multi_gpu   --num_processes ${SLURM_GPUS}   --num_machines 1   src/train.py   --bf16   --output_dir outputs/qwen15b_lora_dolly_lumi   --per_device_batch_size 2   --epochs 1   --num_workers 8
