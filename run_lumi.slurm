@@ -17,6 +17,9 @@ module load lumi-aif-singularity-bindings
 export HF_HOME=${SCRATCH:-$PWD}/.cache/huggingface
 export HF_DATASETS_CACHE=$HF_HOME
 export TOKENIZERS_PARALLELISM=false
+export MIOPEN_CUSTOM_CACHE_DIR="/tmp/miopen-cache-${USER}"
+export MIOPEN_USER_DB_PATH="/tmp/miopen-config-${USER}"
+srun mkdir -p "$MIOPEN_CUSTOM_CACHE_DIR" "$MIOPEN_USER_DB_PATH"
 
 export NCCL_DEBUG=WARN
 export SIF=/appl/local/laifs/containers/lumi-multitorch-latest.sif
