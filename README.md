@@ -13,11 +13,13 @@ called accordingly from the submission script. In particular, on LUMI the
 relevant software can be accessed with
 
 ```bash
-module use /appl/local/csc/modulefiles
-ml pytorch
+module purge
+module use /appl/local/laifs/modules
+module load lumi-aif-singularity-bindings
 ```
+On LUMI, the most straightforward way to run things is using their container (see the slurm script for more details).
 
-and on Leonardo:
+On Leonardo:
 
 ```bash
 ml profile/deeplrn cineca-ai
